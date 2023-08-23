@@ -12,6 +12,8 @@ target/
 *.iml
 *.ipr
 
+.terraform/providers
+
 ### Eclipse ###
 .apt_generated
 .classpath
@@ -33,6 +35,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+.terraform
+.terraform.lock.hcl
 
 ### Mac OS ###
 .DS_Store
