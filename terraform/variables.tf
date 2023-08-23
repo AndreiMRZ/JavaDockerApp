@@ -1,5 +1,5 @@
 variable "ResourceGroup" {
-  type = string
+  type        = string
   description = "resource group name"
 }
 
@@ -12,5 +12,13 @@ variable "cluster_name" {
 }
 
 variable "kubernetes_version" {
+  type = string
+}
+
+variable "system_node_count" {
+  type = number
+}
+
+variable "node_resource_group" {
   type = string
 }
