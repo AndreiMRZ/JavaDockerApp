@@ -36,10 +36,14 @@ on:
 
 env:
   AZURE_CONTAINER_REGISTRY: "mycontainerforapp"
-  CONTAINER_NAME: "statecontainer"
-  RESOURCE_GROUP: "terraformstate"
-  CLUSTER_NAME: "aks_terraform_rg"
-  DEPLOYMENT_MANIFEST_PATH: ""
+  CONTAINER_NAME: "javaappcontainer"
+  RESOURCE_GROUP: "aks_terraform_rg"
+  CLUSTER_NAME: "aks-terraform-cluster"
+  DEPLOYMENT_MANIFEST_PATH: "deployment.yml"
+  ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }} 
 
 jobs:
   buildImage:
@@ -62,7 +66,7 @@ jobs:
       # Builds and pushes an image up to your Azure Container Registry
       - name: Build and push image to ACR
         run: |
-          az acr build --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.RESOURCE_GROUP }} .
+          az acr build --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:latest --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.RESOURCE_GROUP }} .
 
   deploy:
     permissions:
@@ -103,6 +107,6 @@ jobs:
         uses: Azure/k8s-deploy@v4
         with:
           action: deploy
-          #manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
+          manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
           images: |
-            ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }}
+            ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:latest

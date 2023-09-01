@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: javaapp-deployment
+spec:
+  replicas: 1 # Number of replicas for your application
+  selector:
+    matchLabels:
+      app: javaApp
+  template:
+    metadata:
+      labels:
+        app: javaApp
+    spec:
+      containers:
+      - name: javaappcontainer
+        image: mycontainerforapp.azurecr.io/javaappcontainer:latest # Replace with your ACR image
+        ports:
+        - containerPort: 80 # Port your application listens on
+      # Add additional containers or configurations if needed
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: javaApp-service
+spec:
+  selector:
+    app: javaApp
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer # Change to ClusterIP if not exposing externally
