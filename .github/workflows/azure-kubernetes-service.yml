@@ -39,7 +39,7 @@ env:
   CONTAINER_NAME: "statecontainer"
   RESOURCE_GROUP: "terraformstate"
   CLUSTER_NAME: "aks_terraform_rg"
-  DEPLOYMENT_MANIFEST_PATH: "your-deployment-manifest-path"
+  DEPLOYMENT_MANIFEST_PATH: ""
 
 jobs:
   buildImage:
