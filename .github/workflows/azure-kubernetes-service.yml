@@ -35,10 +35,10 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_CONTAINER_REGISTRY: "your-azure-container-registry"
-  CONTAINER_NAME: "your-container-name"
-  RESOURCE_GROUP: "your-resource-group"
-  CLUSTER_NAME: "your-cluster-name"
+  AZURE_CONTAINER_REGISTRY: "mycontainerforapp"
+  CONTAINER_NAME: "statecontainer"
+  RESOURCE_GROUP: "terraformstate"
+  CLUSTER_NAME: "aks_terraform_rg"
   DEPLOYMENT_MANIFEST_PATH: "your-deployment-manifest-path"
 
 jobs:
