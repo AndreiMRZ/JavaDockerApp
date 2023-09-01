@@ -51,6 +51,11 @@ jobs:
       contents: read
       id-token: write
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./app
+
     steps:
       # Checks out the repository this file is in
       - uses: actions/checkout@v3
