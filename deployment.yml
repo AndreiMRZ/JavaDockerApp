@@ -23,7 +23,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: javaApp-service
+  name: javaappservice
 spec:
   selector:
     app: javaApp
